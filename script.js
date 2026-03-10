@@ -1,4 +1,4 @@
-let a, operator, b;
+let a = '', operator = '', b = '';
 const numberButtons = document.querySelectorAll("#numButton");
 const display = document.querySelector("#display");
 const plus = document.querySelector("#plus");
@@ -40,52 +40,72 @@ function operate(a, operator, b){
 numberButtons.forEach(button => {
   button.addEventListener('click', (event) => {
     let value = event.target.textContent;
+    if(a == '' || operator == ''){
+        a += value;
+    }
+    else{
+        b += value;
+    }
+    console.log(a,b, operator);
     display.textContent += value;
   });
 });
 
 plus.addEventListener('click',() =>{
-    a = display.textContent;
-    operator = '+';
-    display.textContent = "";
-    console.log(a);
+    console.log(operator, a, b);
+    if(operator != ''){
+        console.log(operator, a, b);
+        b = display.textContent;
+        a = Number(a);
+        b = Number(b);
+        let c = operate(a, operator, b);
+        display.textContent = c;
+        a = c;
+        b = "";
+        c = "";
+        operator = '+';
+    }
+    else {
+        operator = '+';
+        display.textContent = "+";
+    }
+
 })
 
 minus.addEventListener('click',() =>{
     a = display.textContent;
     operator = '-';
     display.textContent = "";
-    console.log(a);
 })
 
 times.addEventListener('click',() =>{
     a = display.textContent;
     operator = '*';
     display.textContent = "";
-    console.log(a);
 })
 
 divides.addEventListener('click',() =>{
     a = display.textContent;
     operator = '/';
     display.textContent = "";
-    console.log(a);
 })
 
 equal.addEventListener('click',() =>{
-    b = display.textContent;
+    //b = display.textContent;
     a = Number(a);
     b = Number(b);
-    console.log(a, b, operator);
     let c = operate(a, operator, b);
     display.textContent = c;
     a = c;
+    b = "";
+    operator = "";
 })
 
 clear.addEventListener('click',() =>{
     display.textContent = "";
     a = "";
     b = "";
+    operator = "";
 })
 
 
