@@ -74,22 +74,41 @@ function calculate(op){
 }
 
 plus.addEventListener('click',() =>{
+    if(operator != '' && b == ''){
+        operator = '+';
+        return;
+    }
     calculate('+');
 })
 
 minus.addEventListener('click',() =>{
+    if(operator != '' && b == ''){
+        operator = '-';
+        return;
+    }
     calculate('-');
 })
 
 times.addEventListener('click',() =>{
+    if(operator != '' && b == ''){
+        operator = '*';
+        return;
+    }
     calculate('*');
 })
 
 divides.addEventListener('click',() =>{
+    if(operator != '' && b == ''){
+        operator = '/';
+        return;
+    }
     calculate('/');
 })
 
 equal.addEventListener('click',() =>{
+    if (a == '' || b == '' || operator == ''){
+        return;
+    }
     a = Number(a);
     b = Number(b);
     let c = operate(a, operator, b);
