@@ -6,9 +6,9 @@ body {
 
 #display {
     border: 2px solid black;
-    width: 300px;
-    height: 200px;
-    font-size: 50px;
+    width: 500px;
+    height: 100px;
+    font-size: 90px;
 }
 
 button {
