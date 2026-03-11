@@ -53,11 +53,7 @@ numberButtons.forEach(button => {
   });
 });
 
-function calculated(op){
-
-}
-
-plus.addEventListener('click',() =>{
+function calculate(op){
     console.log(operator, a, b);
     if(operator != ''){
         console.log(operator, a, b);
@@ -68,31 +64,28 @@ plus.addEventListener('click',() =>{
         a = c;
         b = "";
         c = "";
-        operator = '+';
+        operator = op;
     }
     else {
-        operator = '+';
-        display.textContent = "+";
+        operator = op;
+        display.textContent = op;
     }
+}
 
+plus.addEventListener('click',() =>{
+    calculate('+');
 })
 
 minus.addEventListener('click',() =>{
-    a = display.textContent;
-    operator = '-';
-    display.textContent = "";
+    calculate('-');
 })
 
 times.addEventListener('click',() =>{
-    a = display.textContent;
-    operator = '*';
-    display.textContent = "";
+    calculate('*');
 })
 
 divides.addEventListener('click',() =>{
-    a = display.textContent;
-    operator = '/';
-    display.textContent = "";
+    calculate('/');
 })
 
 equal.addEventListener('click',() =>{
@@ -111,6 +104,3 @@ clear.addEventListener('click',() =>{
     b = "";
     operator = "";
 })
-
-
-console.log(operate(1, '+', 2));
