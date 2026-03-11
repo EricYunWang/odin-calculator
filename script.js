@@ -38,24 +38,29 @@ function operate(a, operator, b){
 }
 
 numberButtons.forEach(button => {
-  button.addEventListener('click', (event) => {
+    button.addEventListener('click', (event) => {
     let value = event.target.textContent;
     if(a == '' || operator == ''){
         a += value;
+        display.textContent = a;
     }
     else{
         b += value;
+        display.textContent = b;
     }
-    console.log(a,b, operator);
-    display.textContent += value;
+    console.log(a, b, operator);
+    
   });
 });
+
+function calculated(op){
+
+}
 
 plus.addEventListener('click',() =>{
     console.log(operator, a, b);
     if(operator != ''){
         console.log(operator, a, b);
-        b = display.textContent;
         a = Number(a);
         b = Number(b);
         let c = operate(a, operator, b);
@@ -91,7 +96,6 @@ divides.addEventListener('click',() =>{
 })
 
 equal.addEventListener('click',() =>{
-    //b = display.textContent;
     a = Number(a);
     b = Number(b);
     let c = operate(a, operator, b);
