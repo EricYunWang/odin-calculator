@@ -7,6 +7,7 @@ const times = document.querySelector("#times");
 const divides = document.querySelector("#divide");
 const equal = document.querySelector("#equal");
 const clear = document.querySelector("#clear");
+let equalState = false;
 
 function add(a, b){
     return a + b;
@@ -21,7 +22,6 @@ function multiply(a, b){
 }
 
 function divide(a, b){
-    console.log("called");
     return a / b;
 }
 
@@ -34,31 +34,30 @@ function operate(a, operator, b){
         case '*':
             return multiply(a, b);
         case '/':
-            console.log("called");
             return divide(a, b);
     }
 }
 
 numberButtons.forEach(button => {
     button.addEventListener('click', (event) => {
-    let value = event.target.textContent;
-    if(a == '' || operator == ''){
-        a += value;
-        display.textContent = a;
-    }
-    else{
-        b += value;
-        display.textContent = b;
-    }
-    console.log(a, b, operator);
-    
+        if(equalState == true){
+            a = "";
+            equalState = false;
+        }
+        let value = event.target.textContent;
+        if(a == '' || operator == ''){
+            a += value;
+            display.textContent = a;
+        }
+        else{
+            b += value;
+            display.textContent = b;
+        }    
   });
 });
 
 function calculate(op){
-    console.log("called");
     if(operator != ''){
-        console.log(operator, a, b);
         a = Number(a);
         b = Number(b);
         let c = operate(a, operator, b);
@@ -76,6 +75,7 @@ function calculate(op){
 }
 
 plus.addEventListener('click',() =>{
+    equalState = false;
     if(operator != '' && b == ''){
         operator = '+';
         return;
@@ -84,6 +84,7 @@ plus.addEventListener('click',() =>{
 })
 
 minus.addEventListener('click',() =>{
+    equalState = false;
     if(operator != '' && b == ''){
         operator = '-';
         return;
@@ -92,6 +93,7 @@ minus.addEventListener('click',() =>{
 })
 
 times.addEventListener('click',() =>{
+    equalState = false;
     if(operator != '' && b == ''){
         operator = '*';
         return;
@@ -100,7 +102,7 @@ times.addEventListener('click',() =>{
 })
 
 divides.addEventListener('click',() =>{
-    console.log("called");
+    equalState = false;
     if(checkDivideZero()){
         return;
     }
@@ -113,7 +115,6 @@ divides.addEventListener('click',() =>{
 })
 
 equal.addEventListener('click',() =>{
-    console.log("called");
     if (a == '' || b == '' || operator == ''){
         return;
     }
@@ -128,6 +129,7 @@ equal.addEventListener('click',() =>{
     a = c;
     b = "";
     operator = "";
+    equalState = true;
 })
 
 clear.addEventListener('click',() =>{
@@ -135,6 +137,7 @@ clear.addEventListener('click',() =>{
     a = "";
     b = "";
     operator = "";
+    equalState = false;
 })
 
 function checkDivideZero(){
@@ -143,6 +146,7 @@ function checkDivideZero(){
         a = "";
         b = "";
         operator = "";
+        equalState = false;
         return true;
     }
     return false;
