@@ -21,6 +21,7 @@ function multiply(a, b){
 }
 
 function divide(a, b){
+    console.log("called");
     return a / b;
 }
 
@@ -33,6 +34,7 @@ function operate(a, operator, b){
         case '*':
             return multiply(a, b);
         case '/':
+            console.log("called");
             return divide(a, b);
     }
 }
@@ -54,7 +56,7 @@ numberButtons.forEach(button => {
 });
 
 function calculate(op){
-    console.log(operator, a, b);
+    console.log("called");
     if(operator != ''){
         console.log(operator, a, b);
         a = Number(a);
@@ -98,15 +100,24 @@ times.addEventListener('click',() =>{
 })
 
 divides.addEventListener('click',() =>{
+    console.log("called");
+    if(checkDivideZero()){
+        return;
+    }
     if(operator != '' && b == ''){
         operator = '/';
         return;
     }
     calculate('/');
+    
 })
 
 equal.addEventListener('click',() =>{
+    console.log("called");
     if (a == '' || b == '' || operator == ''){
+        return;
+    }
+    else if(checkDivideZero()){
         return;
     }
     a = Number(a);
@@ -125,3 +136,14 @@ clear.addEventListener('click',() =>{
     b = "";
     operator = "";
 })
+
+function checkDivideZero(){
+    if(operator == '/' && b == '0'){
+        display.textContent = "No /0 :)";
+        a = "";
+        b = "";
+        operator = "";
+        return true;
+    }
+    return false;
+}
