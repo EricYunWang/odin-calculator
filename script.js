@@ -274,6 +274,7 @@ function equalButtonFunction(){
     b = "";
     operator = "";
     equalState = true;
+    dotButton.disabled = true;
 }
 
 equal.addEventListener('click',() =>{
