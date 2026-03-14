@@ -41,36 +41,61 @@ function operate(a, operator, b){
     }
 }
 
+function numberButtonsFunction(event){
+    if(equalState == true){
+        a = "";
+        equalState = false;
+        dotButton.disabled = false;
+    }
+    let value = event.target.textContent;
+    if(a == '' || operator == ''){
+        a += value;
+        display.textContent = a;
+    }
+    else{
+        b += value;
+        display.textContent = b;
+    }
+}
+
+function numberKeyboardFunction(num){
+    if(equalState == true){
+        a = "";
+        equalState = false;
+        dotButton.disabled = false;
+    }
+    let value = num;
+    if(a == '' || operator == ''){
+        a += value;
+        display.textContent = a;
+    }
+    else{
+        b += value;
+        display.textContent = b;
+    }
+}
+
 numberButtons.forEach(button => {
     button.addEventListener('click', (event) => {
-        if(equalState == true){
-            a = "";
-            equalState = false;
-            dotButton.disabled = false;
-        }
-        let value = event.target.textContent;
-        if(a == '' || operator == ''){
-            a += value;
-            display.textContent = a;
-        }
-        else{
-            b += value;
-            display.textContent = b;
-        }    
+        numberButtonsFunction(event);
   });
 });
 
-dotButton.addEventListener('click', (event) => {
+function dotButtonFunction(){
     if(a != '' && operator == ''){
-        a += event.target.textContent;
+        a += '.';
         display.textContent = a;
         dotButton.disabled = true;
     }
     else if (b != ''){
-        b += event.target.textContent;
+        b += '.';
         display.textContent = b;
         dotButton.disabled = true;
     }
+}
+
+dotButton.addEventListener('click', () => {
+    dotButtonFunction();
 })
 
 function calculate(op){
@@ -91,7 +116,86 @@ function calculate(op){
     }
 }
 
-plus.addEventListener('click',() =>{
+
+window.addEventListener('keydown', (event) => {
+    switch (event.key){
+        case '+':
+            event.preventDefault();
+            addButtonFunction();
+            break;
+        case '-':
+            event.preventDefault();
+            minusButtonFunction();
+            break;
+        case '*':
+            event.preventDefault();
+            timesButtonFunction();
+            break;
+        case '/':
+            event.preventDefault();
+            divideButtonFunction();
+            break;
+        case '=':
+            event.preventDefault();
+            equalButtonFunction();
+            break;
+        case '1':
+            event.preventDefault();
+            numberKeyboardFunction('1');
+            break;
+        case '2':
+            event.preventDefault();
+            numberKeyboardFunction('2');
+            break;
+        case '3':
+            event.preventDefault();
+            numberKeyboardFunction('3');
+            break;
+        case '4':
+            event.preventDefault();
+            numberKeyboardFunction('4');
+            break;
+        case '5':
+            event.preventDefault();
+            numberKeyboardFunction('5');
+            break;
+        case '6':
+            event.preventDefault();
+            numberKeyboardFunction('6');
+            break;
+        case '7':
+            event.preventDefault();
+            numberKeyboardFunction('7');
+            break;
+        case '8':
+            event.preventDefault();
+            numberKeyboardFunction('8');
+            break;
+        case '9':
+            event.preventDefault();
+            numberKeyboardFunction('9');
+            break;
+        case '0':
+            event.preventDefault();
+            numberKeyboardFunction('0');
+            break;
+        case '.':
+            event.preventDefault();
+            if(dotButton.disabled == true){
+                return;
+            }
+            else{
+                dotButtonFunction();
+                break;
+            }
+        case 'Backspace':
+            event.preventDefault();
+            delButtonFunction();
+            break;
+    }
+});
+
+function addButtonFunction(){
     equalState = false;
     dotButton.disabled = false;
     if(operator != '' && b == ''){
@@ -100,20 +204,28 @@ plus.addEventListener('click',() =>{
         return;
     }
     calculate('+');
+}
+
+plus.addEventListener('click',() =>{
+    addButtonFunction();
 })
 
-minus.addEventListener('click',() =>{
+function minusButtonFunction(){
     equalState = false;
     dotButton.disabled = false;
     if(operator != '' && b == ''){
         operator = '-';
         display.textContent = operator;
-    return;
+        return;
     }
     calculate('-');
+}
+
+minus.addEventListener('click',() =>{
+    minusButtonFunction();
 })
 
-times.addEventListener('click',() =>{
+function timesButtonFunction(){
     equalState = false;
     dotButton.disabled = false;
     if(operator != '' && b == ''){
@@ -122,9 +234,13 @@ times.addEventListener('click',() =>{
         return;
     }
     calculate('*');
+}
+
+times.addEventListener('click',() =>{
+    timesButtonFunction();
 })
 
-divides.addEventListener('click',() =>{
+function divideButtonFunction(){
     equalState = false;
     dotButton.disabled = false;
     if(checkDivideZero()){
@@ -136,10 +252,13 @@ divides.addEventListener('click',() =>{
         return;
     }
     calculate('/');
-    
+}
+
+divides.addEventListener('click',() =>{
+    divideButtonFunction();
 })
 
-equal.addEventListener('click',() =>{
+function equalButtonFunction(){
     if (a == '' || b == '' || operator == ''){
         return;
     }
@@ -155,6 +274,10 @@ equal.addEventListener('click',() =>{
     b = "";
     operator = "";
     equalState = true;
+}
+
+equal.addEventListener('click',() =>{
+    equalButtonFunction();
 })
 
 clear.addEventListener('click',() =>{
@@ -166,7 +289,7 @@ clear.addEventListener('click',() =>{
     dotButton.disabled = false;
 })
 
-del.addEventListener('click',() =>{
+function delButtonFunction(){
     if(equalState == true){
         return;
     }
@@ -186,6 +309,10 @@ del.addEventListener('click',() =>{
             dotButton.disabled = false;
         }
     }
+}
+
+del.addEventListener('click',() =>{
+    delButtonFunction();
 })
 
 function checkDivideZero(){
