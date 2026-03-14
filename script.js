@@ -96,6 +96,7 @@ plus.addEventListener('click',() =>{
     dotButton.disabled = false;
     if(operator != '' && b == ''){
         operator = '+';
+        display.textContent = operator;
         return;
     }
     calculate('+');
@@ -106,6 +107,7 @@ minus.addEventListener('click',() =>{
     dotButton.disabled = false;
     if(operator != '' && b == ''){
         operator = '-';
+        display.textContent = operator;
     return;
     }
     calculate('-');
@@ -116,6 +118,7 @@ times.addEventListener('click',() =>{
     dotButton.disabled = false;
     if(operator != '' && b == ''){
         operator = '*';
+        display.textContent = operator;
         return;
     }
     calculate('*');
@@ -129,6 +132,7 @@ divides.addEventListener('click',() =>{
     }
     if(operator != '' && b == ''){
         operator = '/';
+        display.textContent = operator;
         return;
     }
     calculate('/');
