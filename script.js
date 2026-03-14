@@ -8,6 +8,7 @@ const times = document.querySelector("#times");
 const divides = document.querySelector("#divide");
 const equal = document.querySelector("#equal");
 const clear = document.querySelector("#clear");
+const del = document.querySelector("#del");
 let equalState = false;
 dotButton.disabled = false;
 
@@ -159,6 +160,28 @@ clear.addEventListener('click',() =>{
     operator = "";
     equalState = false;
     dotButton.disabled = false;
+})
+
+del.addEventListener('click',() =>{
+    if(equalState == true){
+        return;
+    }
+    if(a != '' && operator == ''){
+        let lastChar = a.slice(-1);
+        a = a.slice(0, -1);
+        display.textContent = a;
+        if(lastChar == '.'){
+            dotButton.disabled = false;
+        }
+    }
+    else if(b != ''){
+        let lastChar = b.slice(-1);
+        b = b.slice(0, -1);
+        display.textContent = b;
+        if(lastChar == '.'){
+            dotButton.disabled = false;
+        }
+    }
 })
 
 function checkDivideZero(){
