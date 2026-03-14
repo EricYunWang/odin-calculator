@@ -1,5 +1,6 @@
 let a = '', operator = '', b = '';
 const numberButtons = document.querySelectorAll("#numButton");
+const dotButton = document.querySelector("#dotButton");
 const display = document.querySelector("#display");
 const plus = document.querySelector("#plus");
 const minus = document.querySelector("#minus");
@@ -8,6 +9,7 @@ const divides = document.querySelector("#divide");
 const equal = document.querySelector("#equal");
 const clear = document.querySelector("#clear");
 let equalState = false;
+dotButton.disabled = false;
 
 function add(a, b){
     return a + b;
@@ -43,6 +45,7 @@ numberButtons.forEach(button => {
         if(equalState == true){
             a = "";
             equalState = false;
+            dotButton.disabled = false;
         }
         let value = event.target.textContent;
         if(a == '' || operator == ''){
@@ -55,6 +58,19 @@ numberButtons.forEach(button => {
         }    
   });
 });
+
+dotButton.addEventListener('click', (event) => {
+    if(a != '' && operator == ''){
+        a += event.target.textContent;
+        display.textContent = a;
+        dotButton.disabled = true;
+    }
+    else if (b != ''){
+        b += event.target.textContent;
+        display.textContent = b;
+        dotButton.disabled = true;
+    }
+})
 
 function calculate(op){
     if(operator != ''){
@@ -76,6 +92,7 @@ function calculate(op){
 
 plus.addEventListener('click',() =>{
     equalState = false;
+    dotButton.disabled = false;
     if(operator != '' && b == ''){
         operator = '+';
         return;
@@ -85,15 +102,17 @@ plus.addEventListener('click',() =>{
 
 minus.addEventListener('click',() =>{
     equalState = false;
+    dotButton.disabled = false;
     if(operator != '' && b == ''){
         operator = '-';
-        return;
+    return;
     }
     calculate('-');
 })
 
 times.addEventListener('click',() =>{
     equalState = false;
+    dotButton.disabled = false;
     if(operator != '' && b == ''){
         operator = '*';
         return;
@@ -103,6 +122,7 @@ times.addEventListener('click',() =>{
 
 divides.addEventListener('click',() =>{
     equalState = false;
+    dotButton.disabled = false;
     if(checkDivideZero()){
         return;
     }
@@ -138,6 +158,7 @@ clear.addEventListener('click',() =>{
     b = "";
     operator = "";
     equalState = false;
+    dotButton.disabled = false;
 })
 
 function checkDivideZero(){
