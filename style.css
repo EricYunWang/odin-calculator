@@ -1,17 +1,59 @@
 body {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: gray;
+}
+
+#container{
+    display: flex;
     flex-direction: column;
-    gap: 0px;
+    gap: 20px;
+    padding: 20px;
+    width: 500px;
+    border: 10px solid black;
 }
 
 #display {
-    border: 2px solid black;
+    border: 5px solid black;
     width: 500px;
     height: 100px;
     font-size: 90px;
+    background-color: white;
+    flex-shrink: 0;
 }
 
-button {
-    width: 50px;
-    height: 50px;
+.toprow{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.zero{
+    width: 225px;
+}
+
+button{
+    width: 90px;
+    height: 90px;
+    font-size: 30px;
+    border: solid 5px black;
+}
+
+.op{
+    background-color: orange;
+}
+
+#empty{
+    background-color: red;
+}
+button:hover {
+    background-color: lightgray;
+}
+
+button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
